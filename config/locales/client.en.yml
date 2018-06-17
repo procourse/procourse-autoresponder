@@ -5,3 +5,7 @@ en:
         title: "Select Autoresponder Start Date"
       date_selector_end:
         title: "Select Autoresponder End Date"
+      time_selector_start:
+        title: "Select Autoresponder Start Time"
+      time_selector_end:
+        title: "Select Autoresponder End Time"
