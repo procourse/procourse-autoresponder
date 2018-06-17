@@ -1,0 +1,18 @@
+{{#if siteSettings.autoresponder_enabled}}
+  <div class="control-group date">
+    <label class="control-label">
+      {{i18n 'procourse_autoresponder.date_selector_start.title'}}
+    </label>
+    <div class="controls">
+    {{date-picker class="date-input" value=model.custom_fields.autoresponder_start_date defaultDate="DD-MM-YYYY"}}
+    </div>
+  </div>
+  <div class="control-group date">
+    <label class="control-label">
+      {{i18n 'procourse_autoresponder.date_selector_end.title'}}
+    </label>
+    <div class="controls">
+    {{date-picker class="date-input" value=model.custom_fields.autoresponder_end_date defaultDate="DD-MM-YYYY"}}
+    </div>
+  </div>
+{{/if}}
