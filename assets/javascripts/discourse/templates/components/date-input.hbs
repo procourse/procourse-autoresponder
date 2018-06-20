@@ -1,1 +1,17 @@
-{{input type="time" value=inputTime}}
+
+<div class="control-group date">
+  <label class="control-label">
+    {{i18n 'procourse_autoresponder.date_selector.title'}}
+  </label>
+  <div class="controls">
+  {{date-picker class="date-input" value=inputDate defaultDate="DD-MM-YYYY"}}
+  </div>
+</div>
+<div class="control-group time">
+  <label class="control-label">
+    {{i18n 'procourse_autoresponder.time_selector.title'}}
+  </label>
+  <div class="controls">
+    {{input type="time" value=inputTime}}
+  </div>
+</div>

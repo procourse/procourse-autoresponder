@@ -6,15 +6,29 @@ import {
 
 export default Ember.Component.extend({
   inputTime: null,
+  inputDate: null,
   utcTime: null,
 
   @on("didInsertElement")
   setInputTime(){
-    this.set('inputTime',this.get('utcTime'));
+    let date = new Date(this.get("utcTime"));
+    if (date.toString().slice(0,1) != "I") {
+      this.set("inputDate", date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate());
+      let time = date.toTimeString().slice(0,5);
+      this.set("inputTime", time);
+    }
   },
 
-  @observes("inputTime")
+  // convert the time to UTC
+  @observes("inputTime","inputDate")
   timeChanged(){
-    this.set('utcTime',this.get('inputTime'));
+    let date = new Date(this.get('inputDate') + " " + this.get('inputTime'));
+    if (date.toString().slice(0,1) != "I") {
+      this.set("utcTime",date.toUTCString());
+    }else{
+      this.set("utcTime",null);
+    }
   },
+
+
 });
