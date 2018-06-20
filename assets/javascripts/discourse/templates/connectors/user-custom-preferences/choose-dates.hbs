@@ -12,7 +12,7 @@
       {{i18n 'procourse_autoresponder.time_selector_start.title'}}
     </label>
     <div class="controls">
-      {{input type="time" value=model.custom_fields.autoresponder_start_time}}
+      {{date-input type="time" utcTime=model.custom_fields.autoresponder_start_time}}
     </div>
   </div>
   <div class="control-group date">
@@ -28,7 +28,7 @@
       {{i18n 'procourse_autoresponder.time_selector_end.title'}}
     </label>
     <div class="controls">
-      {{input type="time" value=model.custom_fields.autoresponder_end_time}}
+      {{date-input type="time" utcTime=model.custom_fields.autoresponder_end_time}}
     </div>
   </div>
 {{/if}}
