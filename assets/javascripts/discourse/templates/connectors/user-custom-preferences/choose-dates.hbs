@@ -1,3 +1,11 @@
 {{#if siteSettings.autoresponder_enabled}}
+  <label class="control-label">
+    {{i18n 'procourse_autoresponder.date_start.title'}}
+  </label>
   {{date-input utcTime=model.custom_fields.autoresponder_start_date}}
+
+  <label class="control-label">
+    {{i18n 'procourse_autoresponder.date_end.title'}}
+  </label>
+  {{date-input utcTime=model.custom_fields.autoresponder_end_date}}
 {{/if}}
