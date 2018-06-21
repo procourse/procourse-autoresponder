@@ -9,3 +9,5 @@ en:
         title: "Select the start date of Autoresponder"
       date_end:
         title: "Select the end date of Autoresponder"
+      edit_message:
+        title: "Message template for Autoresponder"

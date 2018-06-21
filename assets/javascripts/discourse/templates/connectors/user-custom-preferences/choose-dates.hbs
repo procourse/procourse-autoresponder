@@ -8,4 +8,9 @@
     {{i18n 'procourse_autoresponder.date_end.title'}}
   </label>
   {{date-input utcTime=model.custom_fields.autoresponder_end_date}}
+
+  <label class="control-label">
+    {{i18n 'procourse_autoresponder.edit_message.title'}}
+  </label>
+  {{d-editor value=model.custom_fields.autoresponder_message class="raw-bio"}}
 {{/if}}
