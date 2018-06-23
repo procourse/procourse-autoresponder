@@ -13,4 +13,9 @@
     {{i18n 'procourse_autoresponder.edit_message.title'}}
   </label>
   {{d-editor value=model.custom_fields.autoresponder_message class="raw-bio"}}
+
+  <label class="control-label">
+    {{i18n 'procourse_autoresponder.choose_groups.title'}}
+  </label>
+  {{group-selector groupNames=model.custom_fields.autoresponder_groups groupFinder=userGroupFinder}}
 {{/if}}

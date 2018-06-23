@@ -11,3 +11,5 @@ en:
         title: "Select the end date of Autoresponder"
       edit_message:
         title: "Message template for Autoresponder"
+      choose_groups:
+        title: "Select the user groups to be watched"
