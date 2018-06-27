@@ -38,26 +38,30 @@ after_initialize do
         watched_groups = user.custom_fields["autoresponder_groups"].split(',')
         start_date = DateTime.parse(user.custom_fields["autoresponder_start_date"]) unless user.custom_fields["autoresponder_start_date"].nil? || user.custom_fields["autoresponder_start_date"].empty?
         end_date = DateTime.parse(user.custom_fields["autoresponder_end_date"]) unless user.custom_fields["autoresponder_end_date"].nil? || user.custom_fields["autoresponder_end_date"].empty?
+        user_groups = user.groups.pluck(:name)
 
-        if start_date && DateTime.now >= start_date
-          unless end_date && DateTime.now > end_date
-            #When both start date and end date is present and now its the proper time
-            Jobs.enqueue(
-              :send_autoresponder_message,
-              topic_id: post.topic_id,
-              user: user,
-              post_number: post.post_number,
-            )
-          end
-        else
-          if !start_date && end_date && DateTime.now <= end_date
-            #When start date is not present and end date is present and in the future or now
-            Jobs.enqueue(
-              :send_autoresponder_message,
-              topic_id: post.topic_id,
-              user: user,
-              post_number: post.post_number,
-            )
+        if (watched_groups && !watched_groups.empty? && !(watched_groups & user_groups).empty?) || (watched_groups && watched_groups.empty?)
+          #Trigger if watched groups are empty or watched groups and user groups have items in common
+          if start_date && DateTime.now >= start_date
+            unless end_date && DateTime.now > end_date
+              #When both start date and end date is present and now its the proper time
+              Jobs.enqueue(
+                :send_autoresponder_message,
+                topic_id: post.topic_id,
+                user: user,
+                post_number: post.post_number,
+              )
+            end
+          else
+            if !start_date && end_date && DateTime.now <= end_date
+              #When start date is not present and end date is present and in the future or now
+              Jobs.enqueue(
+                :send_autoresponder_message,
+                topic_id: post.topic_id,
+                user: user,
+                post_number: post.post_number,
+              )
+            end
           end
         end
 
