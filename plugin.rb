@@ -32,7 +32,7 @@ after_initialize do
         if users[0].user_id != post.user_id
           user = User.find_by(id: users[0].user_id)
         else
-          user = User.find_by(id: users[0].user_id)
+          user = User.find_by(id: users[1].user_id)
         end
 
         watched_groups = user.custom_fields["autoresponder_groups"].split(',')
@@ -45,20 +45,22 @@ after_initialize do
           if start_date && DateTime.now >= start_date
             unless end_date && DateTime.now > end_date
               #When both start date and end date is present and now its the proper time
+              puts "Job enqued"
               Jobs.enqueue(
                 :send_autoresponder_message,
                 topic_id: post.topic_id,
-                user: user,
+                username: user.username,
                 post_number: post.post_number,
               )
             end
           else
             if !start_date && end_date && DateTime.now <= end_date
               #When start date is not present and end date is present and in the future or now
+              puts "Job enqued"
               Jobs.enqueue(
                 :send_autoresponder_message,
                 topic_id: post.topic_id,
-                user: user,
+                username: user.username,
                 post_number: post.post_number,
               )
             end

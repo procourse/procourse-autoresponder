@@ -1,10 +1,11 @@
 module Jobs
   class SendAutoresponderMessage < Jobs::Base
     def execute(args)
-      if sender = args[:user]
+      if sender = User.find_by(username: args[:username])
         topic_id = args[:topic_id]
         post_number = args[:post_number]
         message = sender.custom_fields["autoresponder_message"]
+
         post = PostCreator.create!(
           sender,
           raw: message,
